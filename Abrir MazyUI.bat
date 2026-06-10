@@ -37,7 +37,7 @@ for /f "tokens=5" %%p in ('netstat -ano 2^>nul ^| findstr "127.0.0.1:7777 " ^| f
 
 REM Inicia o servidor em background, minimizado
 echo  Iniciando servidor...
-start "MazyUI Server" /min cmd /c "node MazyUI-server.mjs > MazyUI-server.log 2>&1"
+start "MazyUI Server" /min cmd /c "node start.mjs > MazyUI-server.log 2>&1"
 
 REM Aguarda o servidor responder (max 60 segundos — primeira execucao instala dependencias)
 set /a tries=0
