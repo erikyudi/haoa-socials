@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #0A0A0A; }
+    .slide {
+      width: 1080px;
+      height: 1350px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(241,63,19,.24), transparent 50%),
+        radial-gradient(circle at 18% 82%, rgba(138,79,224,.16), transparent 50%),
+        #0A0A0A;
+    }
+    .grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(237,233,223,.04) 80px),
+        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(237,233,223,.04) 80px);
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+    .topbar {
+      position: absolute;
+      top: 72px; left: 86px; right: 86px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .logo img { width: 130px; display: block; }
+    .counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px; font-weight: 500;
+      letter-spacing: 0.18em;
+      color: rgba(237,233,223,0.35);
+    }
+    .content {
+      position: absolute;
+      top: 50%; left: 86px; right: 86px;
+      transform: translateY(-50%);
+    }
+    .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: #F13F13; margin-bottom: 20px;
+    }
+    .rule {
+      width: 72px; height: 4px;
+      background: #F13F13;
+      box-shadow: 0 0 20px rgba(241,63,19,.4);
+      margin-bottom: 30px;
+    }
+    .headline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 78px; font-weight: 700;
+      line-height: 0.97; letter-spacing: -0.04em;
+      text-transform: uppercase; color: #EDE9DF;
+      margin: 0 0 40px 0;
+    }
+    .list {
+      list-style: none;
+      margin: 0; padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 21px; font-weight: 400;
+      line-height: 1.4;
+      color: rgba(237,233,223,.65);
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(237,233,223,.08);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .list li:first-child { border-top: 1px solid rgba(237,233,223,.08); }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #F13F13;
+      flex-shrink: 0;
+    }
+    .note {
+      position: absolute;
+      bottom: 100px; left: 86px; right: 86px;
+      font-family: 'Inter', sans-serif;
+      font-size: 17px; font-weight: 400;
+      color: rgba(237,233,223,.35);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="grid"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.03;mix-blend-mode:overlay;">
+      <filter id="gr"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+      <rect width="100%" height="100%" filter="url(#gr)"/>
+    </svg>
+    <div class="topbar">
+      <div class="logo"><img src="../../../../identidade/logo.svg" alt="HAOA"></div>
+      <div class="counter">04 / 06</div>
+    </div>
+    <div class="content">
+      <div class="kicker">↳ 02 · PRA QUEM É</div>
+      <div class="rule"></div>
+      <h2 class="headline">Pra quem tem<br>responsabilidades</h2>
+      <ul class="list">
+        <li><span class="dot"></span>Quem tem família ou dependentes</li>
+        <li><span class="dot"></span>Quem tem dívidas ou financiamentos</li>
+        <li><span class="dot"></span>Autônomo, MEI ou profissional liberal</li>
+        <li><span class="dot"></span>Quem não pode deixar as contas sem responsável</li>
+      </ul>
+    </div>
+    <p class="note">Se alguém depende do seu salário, o seguro de vida é para você.</p>
+  </div>
+</body>
+</html>

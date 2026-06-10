@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}html,body{background:#000;}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;}
+.grain{position:absolute;inset:0;opacity:.035;mix-blend-mode:overlay;pointer-events:none;z-index:3;}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(237,233,223,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(237,233,223,.04) 1px,transparent 1px);background-size:80px 80px;-webkit-mask-image:radial-gradient(ellipse 75% 75% at 20% 80%,black,transparent 65%);mask-image:radial-gradient(ellipse 75% 75% at 20% 80%,black,transparent 65%);pointer-events:none;z-index:2;}
+.hdr{position:absolute;top:72px;left:86px;right:86px;display:flex;justify-content:space-between;align-items:center;z-index:10;}
+.logo{width:128px;filter:brightness(0) invert(1);}
+.cnt{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:500;letter-spacing:.18em;color:rgba(213,210,210,.42);}
+.body{position:absolute;bottom:90px;left:86px;right:86px;z-index:10;}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#FFA400;margin-bottom:16px;}
+.rule{width:72px;height:4px;background:#FFA400;box-shadow:0 0 18px rgba(255,164,0,.55);margin-bottom:32px;}
+h2{font-family:'Space Grotesk',sans-serif;font-size:70px;font-weight:700;line-height:1.02;letter-spacing:-.04em;color:#D5D2D2;margin-bottom:26px;}
+p{font-family:'Inter',sans-serif;font-size:22px;font-weight:400;line-height:1.55;color:rgba(213,210,210,.78);}
+</style>
+</head>
+<body>
+<div class="slide" style="background:radial-gradient(circle at 22% 82%,rgba(255,164,0,.20),transparent 52%),radial-gradient(circle at 72% 18%,rgba(255,122,0,.10),transparent 42%),#0A0A0A;">
+<div class="grid"></div>
+<svg class="grain" xmlns="http://www.w3.org/2000/svg" width="1080" height="1350"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#g)"/></svg>
+<div class="hdr"><img class="logo" src="../../../../identidade/logo.svg"><span class="cnt">02/06</span></div>
+<div class="body">
+  <div class="kicker">↳ RETENÇÃO DE TALENTOS</div>
+  <div class="rule"></div>
+  <h2>Empresa que cuida retém quem vale</h2>
+  <p>Colaboradores com plano de saúde têm 30% menos absenteísmo. Saúde virou critério de escolha de emprego — especialmente pra os bons profissionais.</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { background:#0A0A0A; }
+
+    .slide {
+      width:1080px;
+      height:1350px;
+      position:relative;
+      overflow:hidden;
+      font-family:'Inter', system-ui, sans-serif;
+    }
+
+    /* ── photo ─────────────────────────── */
+    .bg-photo {
+      position:absolute; inset:0;
+      background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1080&q=80');
+      background-size:cover;
+      background-position:center top;
+      filter:grayscale(45%) brightness(0.48) contrast(1.15);
+    }
+
+    /* ── dark gradient overlay ─────────── */
+    .bg-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(
+        170deg,
+        rgba(10,10,10,0.28) 0%,
+        rgba(10,10,10,0.50) 32%,
+        rgba(10,10,10,0.84) 62%,
+        rgba(10,10,10,0.98) 100%
+      );
+    }
+
+    /* ── spectral holo mesh ────────────── */
+    .bg-holo {
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at 72% 8%,  rgba(52,191,210,0.13),  transparent 46%),
+        radial-gradient(circle at 10% 42%, rgba(138,79,224,0.11),  transparent 46%),
+        radial-gradient(circle at 88% 58%, rgba(224,102,47,0.12),  transparent 40%),
+        radial-gradient(circle at 28% 92%, rgba(255,164,0,0.08),   transparent 48%);
+    }
+
+    /* ── technical grid ────────────────── */
+    .bg-grid {
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(rgba(237,233,223,.026) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(237,233,223,.026) 1px, transparent 1px);
+      background-size:80px 80px;
+      mask-image:radial-gradient(ellipse 80% 62% at 50% 32%, #000 12%, transparent 100%);
+      -webkit-mask-image:radial-gradient(ellipse 80% 62% at 50% 32%, #000 12%, transparent 100%);
+    }
+
+    /* ── SVG noise grain ───────────────── */
+    .bg-grain {
+      position:absolute; inset:0; width:100%; height:100%;
+      opacity:.038; mix-blend-mode:overlay; pointer-events:none;
+    }
+
+    /* ── HUD corner marks ──────────────── */
+    .hud { position:absolute; width:16px; height:16px; }
+    .hud.tl { top:50px; left:50px;   border-top:1.5px solid rgba(255,164,0,.4); border-left:1.5px solid rgba(255,164,0,.4); }
+    .hud.tr { top:50px; right:50px;  border-top:1.5px solid rgba(255,164,0,.4); border-right:1.5px solid rgba(255,164,0,.4); }
+    .hud.bl { bottom:50px; left:50px;  border-bottom:1.5px solid rgba(255,164,0,.4); border-left:1.5px solid rgba(255,164,0,.4); }
+    .hud.br { bottom:50px; right:50px; border-bottom:1.5px solid rgba(255,164,0,.4); border-right:1.5px solid rgba(255,164,0,.4); }
+
+    /* ── decorative orbit rings ────────── */
+    .ring {
+      position:absolute;
+      top:-155px; right:-175px;
+      width:570px; height:570px;
+      border-radius:50%;
+      border:1px solid rgba(52,191,210,0.07);
+      pointer-events:none;
+    }
+    .ring::before {
+      content:''; position:absolute; inset:95px;
+      border-radius:50%;
+      border:1px solid rgba(52,191,210,0.05);
+    }
+    .ring::after {
+      content:''; position:absolute; inset:190px;
+      border-radius:50%;
+      border:1px solid rgba(138,79,224,0.07);
+    }
+
+    /* ── header row ────────────────────── */
+    .header {
+      position:absolute;
+      top:80px; left:86px; right:86px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .logo { height:28px; width:auto; }
+    .badge {
+      font-family:'JetBrains Mono', monospace;
+      font-size:12px; font-weight:500;
+      letter-spacing:.22em; text-transform:uppercase;
+      color:rgba(237,233,223,.32);
+    }
+
+    /* ── content block (bottom-anchored) ─ */
+    .content {
+      position:absolute;
+      bottom:0; left:0; right:0;
+      padding:0 86px 82px;
+    }
+
+    .kicker {
+      font-family:'JetBrains Mono', monospace;
+      font-size:13px; font-weight:500;
+      letter-spacing:.28em; text-transform:uppercase;
+      color:#FFA400;
+      margin-bottom:18px;
+    }
+
+    .rule {
+      width:72px; height:4px;
+      background:#FFA400;
+      box-shadow:0 0 22px rgba(255,164,0,.38);
+      border-radius:2px;
+      margin-bottom:26px;
+    }
+
+    h1.headline {
+      font-family:'Space Grotesk', sans-serif;
+      font-size:88px; font-weight:500;
+      line-height:1.0; letter-spacing:-.042em;
+      text-transform:uppercase;
+      color:#EDE9DF;
+      margin-bottom:28px;
+    }
+
+    .body-text {
+      font-family:'Inter', sans-serif;
+      font-size:19px; font-weight:400;
+      line-height:1.62;
+      color:rgba(237,233,223,.68);
+      max-width:700px;
+      margin-bottom:46px;
+    }
+
+    .bottom-row {
+      display:flex; align-items:center; gap:22px;
+    }
+
+    .cta-pill {
+      display:inline-flex; align-items:center;
+      padding:11px 22px;
+      background:#FFA400; color:#0A0A0A;
+      font-family:'Inter', sans-serif;
+      font-size:13px; font-weight:700;
+      letter-spacing:.04em;
+      border-radius:999px;
+      box-shadow:0 0 28px rgba(255,164,0,.16);
+    }
+
+    .handle {
+      font-family:'JetBrains Mono', monospace;
+      font-size:13px; font-weight:500;
+      letter-spacing:.18em;
+      color:rgba(237,233,223,.32);
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+
+    <!-- background layers -->
+    <div class="bg-photo"></div>
+    <div class="bg-overlay"></div>
+    <div class="bg-holo"></div>
+    <div class="bg-grid"></div>
+    <svg class="bg-grain" xmlns="http://www.w3.org/2000/svg">
+      <filter id="g">
+        <feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" stitchTiles="stitch"/>
+        <feColorMatrix type="saturate" values="0"/>
+      </filter>
+      <rect width="100%" height="100%" filter="url(#g)"/>
+    </svg>
+
+    <!-- décor -->
+    <div class="ring"></div>
+    <div class="hud tl"></div>
+    <div class="hud tr"></div>
+    <div class="hud bl"></div>
+    <div class="hud br"></div>
+
+    <!-- header -->
+    <div class="header">
+      <img class="logo"
+           src="../../../../identidade/logo.svg"
+           alt="HAOA"
+           style="filter:brightness(0) invert(1);">
+      <span class="badge">Corretora de Seguros</span>
+    </div>
+
+    <!-- main content -->
+    <div class="content">
+      <div class="kicker">↳ Seguro Cyber</div>
+      <div class="rule"></div>
+      <h1 class="headline">Seu negócio<br>está seguro no<br>mundo digital?</h1>
+      <p class="body-text">Vazamento de dados, golpes online e invasão de sistemas já causam prejuízos milionários em empresas de todos os tamanhos. O Seguro Cyber protege o que a tecnologia sozinha não consegue.</p>
+      <div class="bottom-row">
+        <span class="cta-pill">Solicitar consultoria</span>
+        <span class="handle">@haoaseguros</span>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #0A0A0A; }
+    .slide {
+      width: 1080px;
+      height: 1350px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 90% 80% at 50% 0%, rgba(255,164,0,.9) 0%, rgba(204,130,0,.65) 38%, rgba(10,10,10,1) 75%),
+        #0A0A0A;
+    }
+    /* halftone overlay */
+    .halftone {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,209,102,.18) 1.3px, transparent 1.3px);
+      background-size: 9px 9px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+      pointer-events: none;
+    }
+    .grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(10,10,10,.06) 80px),
+        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(10,10,10,.06) 80px);
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+    .topbar {
+      position: absolute;
+      top: 72px; left: 86px; right: 86px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px; font-weight: 500;
+      letter-spacing: 0.18em;
+      color: rgba(10,10,10,0.4);
+    }
+    .content {
+      position: absolute;
+      top: 50%; left: 86px; right: 86px;
+      transform: translateY(-50%);
+      text-align: center;
+    }
+    .logo-wrap {
+      margin-bottom: 52px;
+    }
+    .logo-wrap img {
+      width: 160px;
+      filter: brightness(0);
+    }
+    .headline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 64px; font-weight: 700;
+      line-height: 1.0; letter-spacing: -0.04em;
+      text-transform: uppercase; color: #0A0A0A;
+      margin: 0 0 20px 0;
+    }
+    .sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px; font-weight: 400;
+      line-height: 1.5;
+      color: rgba(10,10,10,.65);
+      max-width: 520px;
+      margin: 0 auto 48px;
+    }
+    .cta-pill {
+      display: inline-block;
+      background: #EDE9DF;
+      color: #0A0A0A;
+      font-family: 'Inter', sans-serif;
+      font-size: 18px; font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 16px 40px;
+      border-radius: 999px;
+      text-decoration: none;
+    }
+    .handle {
+      position: absolute;
+      bottom: 86px; left: 0; right: 0;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(10,10,10,.45);
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="halftone"></div>
+    <div class="grid"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.025;mix-blend-mode:multiply;">
+      <filter id="gr"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+      <rect width="100%" height="100%" filter="url(#gr)"/>
+    </svg>
+    <div class="topbar">
+      <div style="width:130px;"></div>
+      <div class="counter">06 / 06</div>
+    </div>
+    <div class="content">
+      <div class="logo-wrap">
+        <img src="../../../../identidade/logo.svg" alt="HAOA">
+      </div>
+      <h2 class="headline">Proteger o que<br>você construiu<br>faz sentido.</h2>
+      <p class="sub">A HAOA te ajuda a encontrar a cobertura certa, sem custo de consultoria.</p>
+      <span class="cta-pill">Fale com a HAOA</span>
+    </div>
+    <div class="handle">@haoacorretora</div>
+  </div>
+</body>
+</html>

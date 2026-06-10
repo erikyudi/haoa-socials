@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #000; }
+    * { box-sizing: border-box; }
+    .slide {
+      width: 1080px; height: 1350px;
+      position: relative; overflow: hidden;
+      color: #EDE9DF;
+      background:
+        radial-gradient(ellipse 90% 60% at 50% 0%, rgba(255,164,0,.75) 0%, rgba(224,102,47,.5) 35%, transparent 70%),
+        #0A0A0A;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    .grain {
+      position: absolute; inset: 0; pointer-events: none; z-index: 5;
+      opacity: 0.04; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .halftone {
+      position: absolute; inset: 0; pointer-events: none; z-index: 3;
+      background-image: radial-gradient(circle, rgba(255,164,0,.5) 1px, transparent 1px);
+      background-size: 9px 9px;
+      mask-image: radial-gradient(ellipse 70% 50% at 50% 5%, black, transparent 65%);
+      opacity: 0.18;
+    }
+    .grid {
+      position: absolute; inset: 0; pointer-events: none; z-index: 2;
+      background-image:
+        linear-gradient(rgba(237,233,223,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(237,233,223,.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .topbar {
+      position: absolute; top: 70px; left: 80px; right: 80px;
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 10;
+    }
+    .logo-small { width: 120px; }
+    .counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px; font-weight: 500; letter-spacing: 0.22em;
+      color: rgba(237,233,223,.3); text-transform: uppercase;
+    }
+    .main {
+      position: absolute;
+      top: 50%; left: 80px; right: 80px;
+      transform: translateY(-50%);
+      text-align: center;
+      z-index: 10;
+    }
+    .logo-main {
+      width: 260px; margin: 0 auto 52px;
+      display: block;
+    }
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 70px; font-weight: 700;
+      line-height: 1.0; letter-spacing: -0.04em;
+      text-transform: uppercase; color: #EDE9DF;
+      margin: 0 0 44px;
+    }
+    .cta-pill {
+      display: inline-block;
+      background: #EDE9DF; color: #0A0A0A;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px; font-weight: 700;
+      letter-spacing: -0.01em;
+      padding: 18px 44px;
+      border-radius: 999px;
+      margin-bottom: 36px;
+    }
+    .sep-bottom {
+      height: 1px; background: rgba(237,233,223,.12);
+      margin: 0 0 24px;
+    }
+    .tagline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(237,233,223,.35);
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="grain"></div>
+    <div class="halftone"></div>
+    <div class="grid"></div>
+    <div class="topbar">
+      <img class="logo-small" src="../../../../identidade/logo.svg" alt="HAOA">
+      <span class="counter">06 / 06</span>
+    </div>
+    <div class="main">
+      <img class="logo-main" src="../../../../identidade/logo.svg" alt="HAOA Corretora">
+      <h2>Proteção certa<br>pra quem<br>você ama.</h2>
+      <div>
+        <div class="cta-pill">Fale com um consultor</div>
+      </div>
+      <div class="sep-bottom"></div>
+      <div class="tagline">haoa.com.br · Corretora de Seguros</div>
+    </div>
+  </div>
+</body>
+</html>

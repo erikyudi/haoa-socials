@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #0A0A0A; }
+    .slide {
+      width: 1080px;
+      height: 1350px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% -20%, rgba(224,102,47,0.26), transparent 50%),
+        radial-gradient(circle at 15% 50%, rgba(138,79,224,0.24), transparent 50%),
+        radial-gradient(circle at 85% 50%, rgba(241,63,19,0.22), transparent 50%),
+        radial-gradient(circle at 50% 120%, rgba(255,164,0,0.28), transparent 55%),
+        radial-gradient(circle at 50% 50%, rgba(255,164,0,0.15), transparent 40%),
+        #0A0A0A;
+    }
+    .grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(237,233,223,.04) 80px),
+        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(237,233,223,.04) 80px);
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+    .topbar {
+      position: absolute;
+      top: 72px; left: 86px; right: 86px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .logo img { width: 130px; display: block; }
+    .counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px; font-weight: 500;
+      letter-spacing: 0.18em;
+      color: rgba(237,233,223,0.35);
+    }
+    .content {
+      position: absolute;
+      bottom: 100px; left: 86px; right: 86px;
+    }
+    .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: #FFA400; margin-bottom: 20px;
+    }
+    .rule {
+      width: 72px; height: 4px;
+      background: #FFA400;
+      box-shadow: 0 0 20px rgba(255,164,0,.45);
+      margin-bottom: 30px;
+    }
+    .headline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 84px; font-weight: 700;
+      line-height: 0.97; letter-spacing: -0.04em;
+      text-transform: uppercase; color: #EDE9DF;
+      margin: 0 0 30px 0;
+    }
+    .sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 21px; font-weight: 400;
+      line-height: 1.5;
+      color: rgba(237,233,223,0.55);
+      max-width: 560px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="grid"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.03;mix-blend-mode:overlay;">
+      <filter id="gr"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+      <rect width="100%" height="100%" filter="url(#gr)"/>
+    </svg>
+    <svg width="360" height="360" viewBox="0 0 360 360" style="position:absolute;right:-90px;top:80px;opacity:.12;pointer-events:none;">
+      <circle cx="180" cy="180" r="55" fill="none" stroke="white" stroke-width=".4"/>
+      <circle cx="180" cy="180" r="100" fill="none" stroke="white" stroke-width=".4"/>
+      <circle cx="180" cy="180" r="150" fill="none" stroke="white" stroke-width=".4"/>
+      <circle cx="180" cy="180" r="4" fill="#FFA400"/>
+      <line x1="180" y1="0" x2="180" y2="360" stroke="white" stroke-width=".3"/>
+      <line x1="0" y1="180" x2="360" y2="180" stroke="white" stroke-width=".3"/>
+    </svg>
+    <div class="topbar">
+      <div class="logo"><img src="../../../../identidade/logo.svg" alt="HAOA"></div>
+      <div class="counter">01 / 06</div>
+    </div>
+    <div class="content">
+      <div class="kicker">↳ SEGURO DE VIDA</div>
+      <div class="rule"></div>
+      <h1 class="headline">Não é sobre<br>morrer.<br>É sobre<br>continuar.</h1>
+      <p class="sub">Quem sustentaria sua família se você não pudesse trabalhar?</p>
+    </div>
+  </div>
+</body>
+</html>

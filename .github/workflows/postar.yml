@@ -1,0 +1,50 @@
+name: Postar agendados
+
+# Roda a cada 15 min e publica os posts cujo horário já venceu.
+# Atenção: o cron do GitHub Actions costuma atrasar 5-15 min (mais em horário
+# de pico). Pra Instagram tá ok — ninguém liga se postou 19:07 em vez de 19:00.
+on:
+  schedule:
+    - cron: '*/15 * * * *' # a cada 15 minutos (UTC)
+  workflow_dispatch: # permite rodar manual pelo botão "Run workflow"
+
+# Necessário pra commitar o agenda.json atualizado de volta no repo.
+permissions:
+  contents: write
+
+# Evita duas execuções simultâneas mexendo no agenda.json ao mesmo tempo.
+concurrency:
+  group: postar-agendados
+  cancel-in-progress: false
+
+jobs:
+  postar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Processar agenda
+        env:
+          META_PAGE_ACCESS_TOKEN: ${{ secrets.META_PAGE_ACCESS_TOKEN }}
+          META_PAGE_ID: ${{ secrets.META_PAGE_ID }}
+          META_IG_USER_ID: ${{ secrets.META_IG_USER_ID }}
+          IMGBB_KEY: ${{ secrets.IMGBB_KEY }}
+        run: node scripts/processar-agenda.js
+
+      - name: Commitar agenda.json se mudou
+        run: |
+          if [ -n "$(git status --porcelain agenda.json)" ]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add agenda.json
+            git commit -m "chore(agenda): atualiza status dos posts publicados"
+            git push
+          else
+            echo "agenda.json sem mudanças."
+          fi

@@ -1,0 +1,11 @@
+{
+  "name": "sabec-os",
+  "type": "module",
+  "scripts": {
+    "start": "node start.mjs"
+  },
+  "devDependencies": {
+    "jimp": "^1.6.1",
+    "sharp": "^0.34.5"
+  }
+}

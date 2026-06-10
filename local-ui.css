@@ -1,0 +1,918 @@
+/* ============================================================
+   Sargentão — Identidade Visual
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+:root {
+  --ink:    #111111;
+  --paper:  #F5F5F0;
+  --red:    #7F9A4D;   /* Verde Militar Principal — botões, destaques */
+  --green:  #4F5F2F;   /* Verde Militar Escuro */
+  --yellow: #D6A84F;   /* Dourado Estratégico */
+  --sans:   'Montserrat', system-ui, sans-serif;
+  --syne:   'Black Ops One', system-ui, sans-serif;
+}
+
+/* ContentCreator — top-nav overrides (carregado após MazyUI-ui.css) */
+
+/* Brand: oculta elementos não usados */
+.brand-logo,
+.brand-logo.show { display: none !important; }
+.brand .authors  { display: none !important; }
+
+/* ---- App: stack vertical (nav em cima, conteúdo embaixo) ---- */
+.app {
+  grid-template-columns: 1fr !important;
+  grid-template-rows: auto 1fr;
+  transition: none !important;
+}
+.app.sidebar-collapsed { grid-template-columns: 1fr !important; }
+
+/* ---- Sidebar → faixa horizontal no topo ---- */
+.sidebar {
+  height: auto !important;
+  min-height: 52px;
+  flex-direction: row !important;
+  align-items: center !important;
+  padding: 0 20px !important;
+  gap: 0 !important;
+  overflow: visible !important;
+  z-index: 50 !important;
+  border-bottom: 1px solid rgba(245,240,232,0.09);
+  /* position: sticky; top: 0 já vem do layout.css */
+}
+
+/* ---- Brand: compacto inline ---- */
+.brand {
+  padding: 0 !important;
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+  padding-right: 20px !important;
+  flex-shrink: 0;
+}
+.brand .mark { font-size: 15px !important; white-space: nowrap; }
+.brand .tag  { display: none !important; }
+
+/* ---- Nav: row horizontal ---- */
+.nav {
+  flex: 1 !important;
+  flex-direction: row !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  gap: 0 !important;
+  align-items: stretch !important;
+  height: 100%;
+  scrollbar-width: none;
+}
+.nav::-webkit-scrollbar { display: none; }
+
+.nav-sep {
+  width: 1px !important;
+  height: 18px !important;
+  align-self: center;
+  background: rgba(245,240,232,0.12) !important;
+  margin: 0 8px !important;
+}
+
+/* ---- Nav items: abas horizontais ---- */
+.nav-item {
+  padding: 0 14px !important;
+  border-radius: 0 !important;
+  white-space: nowrap;
+  overflow: visible !important;
+  width: auto !important;
+  flex-shrink: 0;
+  position: relative !important;
+  transform: none !important;
+  box-shadow: none !important;
+  color: rgba(245,240,232,0.60) !important;
+  font-size: 14px !important;
+  height: 100%;
+  display: flex !important;
+  align-items: center !important;
+  transition: color 150ms ease !important;
+}
+
+/* Oculta glyph na nav horizontal */
+.nav-item .ico { display: none !important; }
+
+/* Remove camada radial do sidebar */
+.nav-item::before { display: none !important; }
+
+.nav-item:hover:not(.active) {
+  background: transparent !important;
+  color: var(--paper) !important;
+  transform: none !important;
+}
+
+/* Underline animado */
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  background: var(--item-glow, rgba(245,240,232,0.65));
+  border-radius: 2px 2px 0 0;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 220ms cubic-bezier(.4,0,.2,1);
+  pointer-events: none;
+}
+
+.nav-item:hover::after,
+.nav-item.active::after { transform: scaleX(1); }
+
+.nav-item.active {
+  color: var(--paper) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ---- Nav group: dropdown no hover ---- */
+.nav-group {
+  position: relative !important;
+  margin: 0 !important;
+  height: 100%;
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+/* Underline no header quando filho está ativo */
+.nav-group.has-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 14px;
+  right: 14px;
+  height: 2px;
+  background: rgba(245,240,232,0.38);
+  border-radius: 2px 2px 0 0;
+  pointer-events: none;
+}
+
+.nav-group-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  padding: 0 14px !important;
+  height: 100%;
+  border: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  font-family: var(--sans) !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: rgba(245,240,232,0.60) !important;
+  white-space: nowrap;
+  gap: 5px !important;
+  transition: color 150ms ease !important;
+  cursor: default !important;
+  background: transparent !important;
+}
+
+.nav-group-header:hover,
+.nav-group:hover .nav-group-header {
+  background: transparent !important;
+  color: var(--paper) !important;
+}
+
+.nav-group.has-active .nav-group-header { color: var(--paper) !important; }
+
+.nav-group-arrow { font-size: 9px; opacity: 0.4; }
+
+/* Dropdown */
+.nav-group-children {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  padding: 6px !important;
+  padding-left: 6px !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  min-width: 192px !important;
+  background: var(--ink) !important;
+  border: 1px solid rgba(245,240,232,0.11) !important;
+  border-top: none !important;
+  border-radius: 0 0 10px 10px !important;
+  box-shadow: 0 18px 48px rgba(0,0,0,0.5) !important;
+  z-index: 100 !important;
+  /* Oculto por padrão — CSS :hover no nav-group mostra */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 140ms ease, transform 160ms cubic-bezier(.4,0,.2,1);
+}
+
+/*
+  :hover em nav-group inclui descendentes mesmo que position: absolute
+  (spec CSS — o ponteiro sobre nav-group-children mantém nav-group:hover ativo)
+*/
+.nav-group:hover .nav-group-children {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) !important;
+}
+
+/* Itens dentro do dropdown */
+.nav-group-children .nav-item {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 38px;
+  padding: 0 12px !important;
+  border-radius: 7px !important;
+  justify-content: flex-start !important;
+}
+
+/* Mostra glyph no dropdown */
+.nav-group-children .nav-item .ico {
+  display: inline-flex !important;
+  opacity: 0.5;
+}
+
+/* Barra lateral no lugar de underline */
+.nav-group-children .nav-item::after {
+  bottom: 6px;
+  top: 6px;
+  left: 0;
+  right: auto;
+  width: 2px;
+  height: auto;
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 160ms cubic-bezier(.4,0,.2,1);
+  border-radius: 2px;
+}
+
+.nav-group-children .nav-item:hover::after,
+.nav-group-children .nav-item.active::after { transform: scaleY(1) !important; }
+
+/* ---- Topbar: cola abaixo do nav — oculto em todos os painéis ---- */
+.topbar { top: 52px !important; z-index: 40 !important; display: none !important; }
+
+/* ---- Oculta footer e toggle da sidebar ---- */
+.sidebar-footer { display: none !important; }
+.sidebar-toggle  { display: none !important; }
+
+/* ---- Reseta overrides do estado sidebar-collapsed ---- */
+.app.sidebar-collapsed .nav {
+  margin: 0 !important; padding: 0 !important; border-radius: 0 !important;
+}
+.app.sidebar-collapsed .nav-item {
+  justify-content: flex-start !important; padding: 0 14px !important;
+}
+.app.sidebar-collapsed .nav-item span:not(.ico) { display: inline !important; }
+.app.sidebar-collapsed .brand .mark  { display: block !important; }
+.app.sidebar-collapsed .brand .tag   { display: none !important; }
+.app.sidebar-collapsed .sidebar-footer { display: none !important; }
+.app.sidebar-collapsed .nav-group-header { display: flex !important; }
+.app.sidebar-collapsed .nav-group-children { padding-left: 6px !important; }
+
+/* ============================================================
+   Chat Composer Redesign
+   ============================================================ */
+
+/* Input area outer padding */
+.chat-wrap .chat-input-wrap {
+  padding: 16px 40px 28px;
+  background: var(--paper);
+  border-top: none !important;
+}
+
+/* Quick chips: centralizados, com wrap */
+.chat-quick-chips {
+  flex-wrap: wrap !important;
+  overflow-x: visible !important;
+  scrollbar-width: none;
+  margin: 0 auto 10px !important;
+  max-width: 960px !important;
+  justify-content: center !important;
+  padding-bottom: 2px;
+}
+.chat-quick-chips::-webkit-scrollbar { display: none; }
+
+/* Floating composer card */
+.chat-composer {
+  max-width: 960px;
+  margin: 0 auto;
+  background: white;
+  border: 1px solid var(--line-strong);
+  border-radius: 18px;
+  padding: 12px 14px 10px;
+  box-shadow: 0 2px 12px rgba(28,28,26,0.07), 0 1px 3px rgba(28,28,26,0.04);
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+  cursor: text;
+}
+.chat-composer:focus-within {
+  box-shadow: 0 4px 20px rgba(28,28,26,0.11), 0 1px 4px rgba(28,28,26,0.05);
+}
+
+/* Attachments inside composer */
+.chat-composer .chat-attachments {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.chat-composer .chat-attachments:empty { display: none; margin: 0; }
+
+/* Textarea */
+.chat-composer .chat-input {
+  display: block;
+  width: 100%;
+  background: transparent;
+  border: none !important;
+  border-radius: 0;
+  outline: none !important;
+  resize: none;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  padding: 0 4px;
+  min-height: 1.5em;
+  max-height: 360px;
+  overflow-y: auto;
+  box-shadow: none !important;
+}
+.chat-composer .chat-input:focus { border: none !important; outline: none !important; }
+
+/* Action bar */
+.chat-composer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  gap: 8px;
+}
+.composer-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.composer-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Attach button (+ icon) */
+.chat-composer .chat-attach {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: var(--ink-muted);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 150ms, color 150ms;
+  flex-shrink: 0;
+}
+.chat-composer .chat-attach:hover {
+  background: var(--paper-2);
+  color: var(--ink-soft);
+}
+.chat-composer .chat-attach svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+
+/* Model picker inside composer */
+.chat-composer .model-picker { position: relative; }
+.chat-composer .model-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border: 0.5px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--sans);
+  transition: border-color 150ms, background 150ms;
+}
+.chat-composer .model-trigger:hover {
+  border-color: var(--ink-muted);
+  background: var(--paper-2);
+}
+.chat-composer .model-trigger.open {
+  border-color: var(--ink-soft);
+  background: var(--paper-2);
+}
+.chat-composer .model-trigger .m-kicker { display: none; }
+.chat-composer .model-trigger .m-current {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.chat-composer .model-trigger .m-caret {
+  font-size: 9px;
+  color: var(--ink-muted);
+}
+
+/* Model menu opens upward */
+.chat-composer .model-menu {
+  top: auto !important;
+  bottom: calc(100% + 8px);
+  right: 0;
+  left: auto;
+}
+
+/* Send button — icon pill */
+.chat-send-icon {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px;
+  padding: 0 !important;
+  border-radius: 10px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  flex-shrink: 0;
+}
+.chat-send-icon:not(:disabled) {
+  background: var(--red) !important;
+  color: white !important;
+  box-shadow: 0 2px 8px rgba(208,48,10,0.25) !important;
+}
+.chat-send-icon:disabled {
+  background: var(--paper-3) !important;
+  color: var(--ink-muted) !important;
+  opacity: 1 !important;
+  cursor: default !important;
+  box-shadow: none !important;
+}
+.chat-send-icon svg { display: block; }
+
+/* Disclaimer */
+.chat-disclaimer {
+  display: none !important;
+}
+
+/* Drag-drop: apply to inner card */
+.chat-input-wrap.drop-target {
+  outline: none !important;
+  background: transparent !important;
+}
+.chat-input-wrap.drop-target .chat-composer {
+  border: 1.5px dashed var(--red) !important;
+  background: rgba(208,48,10,0.03) !important;
+}
+
+/* ============================================================
+   Chat: topbar oculto + status bar compacto
+   ============================================================ */
+
+/* Esconde o topbar inteiro quando o chat está ativo */
+.main:has(.chat-wrap) .topbar {
+  display: none !important;
+}
+
+/* Esconde o topbar na biblioteca para ganhar espaço */
+.main:has(#content[data-panel="biblioteca"]) .topbar {
+  display: none !important;
+}
+
+/* Status bar (SESSÃO ATIVA) mais compacto */
+.chat-top {
+  padding: 5px 20px !important;
+  min-height: 0 !important;
+  gap: 8px !important;
+}
+.chat-top .info,
+#chat-status {
+  font-size: 10px !important;
+  letter-spacing: 0.04em !important;
+  opacity: 0.65;
+}
+.chat-top .btn.btn-ghost {
+  font-size: 11px !important;
+  padding: 3px 8px !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+.persist-toggle {
+  font-size: 11px !important;
+  padding: 3px 8px !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+.history-count {
+  font-size: 10px !important;
+}
+
+/* New empty state */
+.chat-empty-v2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px 40px;
+  text-align: center;
+}
+.chat-empty-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  color: var(--red);
+  opacity: 0.80;
+}
+.chat-empty-icon svg { width: 100%; height: 100%; }
+.chat-empty-v2 .chat-empty-lead {
+  font-family: var(--syne);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: 0 0 8px;
+  line-height: 1.15;
+}
+.chat-empty-sub {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin: 0 0 20px;
+  max-width: 380px;
+  line-height: 1.55;
+}
+.chat-empty-chips { justify-content: center; gap: 8px; }
+
+/* ============================================================
+   Chat: Redesign fluido — estilo Claude web
+   ============================================================ */
+
+/* Corrige altura: nav horizontal = 52px, topbar oculto */
+.main:has(.chat-wrap) .content {
+  padding: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+.chat-wrap {
+  height: calc(100vh - 52px) !important;
+  margin: 0 !important;
+}
+
+/* Área de scroll: flex coluna → empty state empurra para baixo; scrollbar oculta */
+.chat-scroll {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 28px 24px 20px !important;
+  scrollbar-width: none !important;
+}
+.chat-scroll::-webkit-scrollbar { display: none; }
+
+/* Empty state: margin-top: auto empurra pro fundo (compositor fica ancorado embaixo) */
+.chat-empty-v2 {
+  margin-top: auto !important;
+  padding-bottom: 8px !important;
+}
+
+/* Turno: centrado com max-width, animação de entrada */
+.turn {
+  width: 100% !important;
+  max-width: 960px !important;
+  margin: 0 auto 24px !important;
+  padding: 0 !important;
+  align-self: center !important;
+  animation: turn-fade 180ms ease-out;
+}
+@keyframes turn-fade {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Cabeçalho do turno: menor, suave */
+.turn-head {
+  font-size: 9px !important;
+  letter-spacing: 0.14em !important;
+  margin-bottom: 5px !important;
+  opacity: 0.38 !important;
+}
+
+/* ---- Usuário: bolha direita ---- */
+.turn-user {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.turn-user .turn-head {
+  text-align: right;
+}
+.turn-user .turn-body {
+  max-width: 74% !important;
+  border-left: none !important;
+  border-radius: 20px 20px 4px 20px !important;
+  padding: 11px 16px !important;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* ---- Assistente: sem caixa, texto limpo ---- */
+.turn-assistant .turn-body {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Bloco de texto: remove fundo e borda vermelha lateral */
+.turn-assistant .run-event.text .ev-body {
+  background: transparent !important;
+  border-left: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  font-size: 15px !important;
+  line-height: 1.68 !important;
+  color: var(--ink) !important;
+}
+
+/* Eventos de ferramenta/resultado: compactos e sutis */
+.turn-assistant .run-event:not(.text) {
+  padding: 5px 10px 5px 8px !important;
+  background: var(--paper-2);
+  border-radius: 8px;
+  gap: 8px !important;
+  margin-bottom: 4px;
+  border: none;
+}
+.turn-assistant .run-event:not(.text) .ev-ico {
+  width: 18px !important;
+  height: 18px !important;
+  flex: 0 0 18px !important;
+  font-size: 10px !important;
+  border-radius: 5px !important;
+  margin-top: 1px !important;
+}
+.turn-assistant .run-event:not(.text) .ev-title {
+  font-size: 12px !important;
+  color: var(--ink-soft) !important;
+  font-weight: 500 !important;
+}
+.turn-assistant .run-event:not(.text) .ev-detail {
+  font-size: 10.5px !important;
+  opacity: 0.65;
+}
+
+/* Estado "Iniciando…" (run-empty) */
+.turn-assistant .run-empty {
+  color: var(--ink-muted) !important;
+  font-size: 13.5px !important;
+  padding: 2px 0 !important;
+  text-align: left !important;
+  font-style: italic;
+}
+
+/* Estado de erro: sem caixa vermelha, apenas texto colorido */
+.turn-assistant.error .turn-body {
+  background: transparent !important;
+  border: none !important;
+}
+.turn-assistant.error .run-event.text .ev-body {
+  color: var(--red) !important;
+}
+
+/* Meta (tempo, custo): discreta */
+.turn-meta {
+  font-size: 10px !important;
+  opacity: 0.38 !important;
+  border-top: none !important;
+  padding-top: 10px !important;
+  margin-top: 10px !important;
+}
+
+/* Run-log: sem gap excessivo entre blocos de texto */
+.turn-assistant .run-log {
+  gap: 4px !important;
+}
+
+/* ============================================================
+   Lib card — hover polish
+   ============================================================ */
+
+.lib-card {
+  transition: transform 160ms ease, box-shadow 160ms ease !important;
+  cursor: pointer;
+}
+.lib-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(28,28,26,0.10) !important;
+}
+
+/* ============================================================
+   Painel: hoje — status grid, ações, upcoming, health
+   ============================================================ */
+
+.hoje-status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.hoje-status-card {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px;
+  transition: border-color 150ms;
+}
+.hoje-status-card.is-active {
+  border-color: var(--line-strong);
+}
+
+.hoje-status-label {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  color: var(--ink-muted);
+  margin-bottom: 6px;
+}
+
+.hoje-status-value {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.3;
+}
+.hoje-status-value--truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.hoje-status-value--muted {
+  color: var(--ink-muted);
+  font-weight: 400;
+  display: block;
+}
+
+.hoje-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-muted);
+  flex-shrink: 0;
+}
+.hoje-status-dot.is-on { background: var(--green); }
+
+.hoje-status-num {
+  font-family: var(--syne);
+  font-weight: 800;
+  font-size: 26px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.hoje-status-note {
+  font-size: 11px;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+
+.hoje-status-btn {
+  font-size: 11px !important;
+  padding: 4px 10px !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin-top: 8px;
+}
+
+/* Seção genérica (card container) */
+.hoje-section {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.hoje-section-title {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+
+/* Ações rápidas */
+.hoje-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.hoje-actions .btn {
+  font-size: 13px !important;
+  padding: 8px 16px !important;
+}
+
+/* Upcoming list */
+.hoje-upcoming {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hoje-upcoming-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: white;
+  border-radius: 7px;
+  border: 1px solid var(--line);
+  transition: border-color 120ms;
+}
+.hoje-upcoming-item:hover { border-color: var(--line-strong); }
+
+.hoje-upcoming-thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  background: var(--paper-3);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.hoje-upcoming-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hoje-upcoming-info { flex: 1; min-width: 0; }
+
+.hoje-upcoming-name {
+  font-weight: 600;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ink);
+}
+
+.hoje-upcoming-date {
+  font-size: 11px;
+  color: var(--ink-muted);
+  margin-top: 2px;
+}
+
+.hoje-upcoming-badge {
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+  background: rgba(232,160,32,0.10);
+  color: var(--yellow);
+  border: 1px solid rgba(232,160,32,0.22);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Health chips */
+.hoje-health-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.hoje-health-chip {
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-family: var(--mono);
+  letter-spacing: 0.06em;
+}
+.hoje-health-chip.is-ok {
+  background: rgba(58,92,48,0.10);
+  color: var(--green);
+  border: 1px solid rgba(58,92,48,0.20);
+}
+.hoje-health-chip.is-warn {
+  background: rgba(232,160,32,0.10);
+  color: var(--yellow);
+  border: 1px solid rgba(232,160,32,0.22);
+}

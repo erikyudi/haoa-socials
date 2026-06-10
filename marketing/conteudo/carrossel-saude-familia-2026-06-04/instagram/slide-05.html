@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}html,body{background:#000;}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;}
+.grain{position:absolute;inset:0;opacity:.035;mix-blend-mode:overlay;pointer-events:none;z-index:3;}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(237,233,223,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(237,233,223,.04) 1px,transparent 1px);background-size:80px 80px;-webkit-mask-image:radial-gradient(ellipse 60% 60% at 50% 50%,black,transparent 70%);mask-image:radial-gradient(ellipse 60% 60% at 50% 50%,black,transparent 70%);pointer-events:none;z-index:2;}
+.hdr{position:absolute;top:72px;left:86px;right:86px;display:flex;justify-content:space-between;align-items:center;z-index:10;}
+.logo{width:128px;filter:brightness(0) invert(1);}
+.cnt{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:500;letter-spacing:.18em;color:rgba(213,210,210,.42);}
+.hud{position:absolute;top:190px;left:86px;right:86px;bottom:170px;pointer-events:none;z-index:5;}
+.hud .c{position:absolute;width:22px;height:22px;}
+.hud .tl{top:0;left:0;border-top:2px solid #FFA400;border-left:2px solid #FFA400;}
+.hud .tr{top:0;right:0;border-top:2px solid #FFA400;border-right:2px solid #FFA400;}
+.hud .bl{bottom:0;left:0;border-bottom:2px solid #FFA400;border-left:2px solid #FFA400;}
+.hud .br{bottom:0;right:0;border-bottom:2px solid #FFA400;border-right:2px solid #FFA400;}
+.body{position:absolute;bottom:90px;left:86px;right:86px;z-index:10;}
+.kicker{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#BCD3FF;margin-bottom:16px;}
+.rule{width:72px;height:4px;background:#BCD3FF;box-shadow:0 0 18px rgba(188,211,255,.40);margin-bottom:28px;}
+h2{font-family:'Space Grotesk',sans-serif;font-size:60px;font-weight:700;line-height:1.02;letter-spacing:-.04em;color:#D5D2D2;margin-bottom:32px;}
+.steps{display:flex;flex-direction:column;gap:18px;}
+.step{display:flex;align-items:baseline;gap:20px;}
+.snum{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;letter-spacing:.14em;color:#FFA400;flex-shrink:0;}
+.stxt{font-family:'Inter',sans-serif;font-size:20px;font-weight:400;line-height:1.4;color:rgba(213,210,210,.80);}
+</style>
+</head>
+<body>
+<div class="slide" style="background:radial-gradient(circle at 50% 50%,rgba(255,164,0,.14),transparent 58%),#0A0A0A;">
+<div class="grid"></div>
+<svg class="grain" xmlns="http://www.w3.org/2000/svg" width="1080" height="1350"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#g)"/></svg>
+<div class="hud"><div class="c tl"></div><div class="c tr"></div><div class="c bl"></div><div class="c br"></div></div>
+<div class="hdr"><img class="logo" src="../../../../identidade/logo.svg"><span class="cnt">05/06</span></div>
+<div class="body">
+  <div class="kicker">↳ NOSSO PROCESSO</div>
+  <div class="rule"></div>
+  <h2>Simples assim</h2>
+  <div class="steps">
+    <div class="step"><span class="snum">01 —</span><span class="stxt">Você fala com nosso consultor</span></div>
+    <div class="step"><span class="snum">02 —</span><span class="stxt">Cotamos nas principais operadoras</span></div>
+    <div class="step"><span class="snum">03 —</span><span class="stxt">Você escolhe o melhor plano</span></div>
+    <div class="step"><span class="snum">04 —</span><span class="stxt">Ativação e suporte contínuo</span></div>
+  </div>
+</div>
+</div>
+</body>
+</html>

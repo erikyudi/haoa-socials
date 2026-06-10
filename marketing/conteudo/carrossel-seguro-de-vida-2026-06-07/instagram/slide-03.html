@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #0A0A0A; }
+    .slide {
+      width: 1080px;
+      height: 1350px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 25% 75%, rgba(224,102,47,.28), transparent 52%),
+        radial-gradient(circle at 75% 25%, rgba(138,79,224,.2), transparent 50%),
+        #0A0A0A;
+    }
+    .grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(237,233,223,.04) 80px),
+        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(237,233,223,.04) 80px);
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+    .topbar {
+      position: absolute;
+      top: 72px; left: 86px; right: 86px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .logo img { width: 130px; display: block; }
+    .counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px; font-weight: 500;
+      letter-spacing: 0.18em;
+      color: rgba(237,233,223,0.35);
+    }
+    .content {
+      position: absolute;
+      top: 50%; left: 86px; right: 86px;
+      transform: translateY(-50%);
+      text-align: center;
+    }
+    .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: #E0662F; margin-bottom: 36px;
+    }
+    .number-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 280px; font-weight: 800;
+      line-height: 1; letter-spacing: -0.04em;
+      color: #FFA400;
+      display: block;
+    }
+    .ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,164,0,.25);
+      pointer-events: none;
+    }
+    .ring2 {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 420px; height: 420px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,164,0,.1);
+      pointer-events: none;
+    }
+    .stat-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px; font-weight: 500;
+      line-height: 1.4;
+      color: rgba(237,233,223,.75);
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+    .rule-center {
+      width: 48px; height: 3px;
+      background: #E0662F;
+      box-shadow: 0 0 16px rgba(224,102,47,.5);
+      margin: 0 auto 32px;
+    }
+    .body {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px; font-weight: 400;
+      line-height: 1.6;
+      color: rgba(237,233,223,.45);
+      max-width: 560px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="grid"></div>
+    <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.03;mix-blend-mode:overlay;">
+      <filter id="gr"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+      <rect width="100%" height="100%" filter="url(#gr)"/>
+    </svg>
+    <div class="topbar">
+      <div class="logo"><img src="../../../../identidade/logo.svg" alt="HAOA"></div>
+      <div class="counter">03 / 06</div>
+    </div>
+    <div class="content">
+      <div class="kicker">↳ DADO</div>
+      <div class="number-wrap">
+        <div class="ring"></div>
+        <div class="ring2"></div>
+        <span class="number">78%</span>
+      </div>
+      <p class="stat-label">dos trabalhadores no Brasil<br>não têm seguro de vida</p>
+      <div class="rule-center"></div>
+      <p class="body">A maioria só descobre que precisava<br>quando já não dá mais para contratar.</p>
+    </div>
+  </div>
+</body>
+</html>
