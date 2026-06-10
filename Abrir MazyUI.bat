@@ -18,6 +18,19 @@ if errorlevel 1 (
   exit /b 1
 )
 
+REM Checa se .env existe, senao pede a chave e cria
+if not exist ".env" (
+  echo.
+  echo  Primeira execucao detectada!
+  echo  Voce precisa de uma chave de API do Claude ^(Anthropic^).
+  echo.
+  set /p APIKEY= Cole sua chave aqui e pressione Enter:
+  echo ANTHROPIC_API_KEY=%APIKEY%> .env
+  echo.
+  echo  Chave salva! Iniciando...
+  echo.
+)
+
 REM Verifica se a porta 7777 ja esta em uso
 netstat -ano 2>nul | findstr "127.0.0.1:7777 " | findstr "LISTENING" >nul 2>nul
 if not errorlevel 1 (
