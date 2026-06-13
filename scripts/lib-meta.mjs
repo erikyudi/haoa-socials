@@ -11,6 +11,7 @@ import fs from 'fs';
 import path from 'path';
 
 export const GRAPH = 'https://graph.facebook.com/v21.0';
+export const IG_GRAPH = 'https://graph.instagram.com/v21.0';
 
 // ── util ────────────────────────────────────────────────────────────────────
 
@@ -83,9 +84,9 @@ export async function uploadAllToImgbb(pngPaths, imgbbKey) {
 
 // ── Graph API helper ──────────────────────────────────────────────────────────
 
-async function graphPost(urlPath, params) {
+async function graphPost(urlPath, params, base = GRAPH) {
   const body = new URLSearchParams(params);
-  const r = await fetch(`${GRAPH}/${urlPath}`, { method: 'POST', body });
+  const r = await fetch(`${base}/${urlPath}`, { method: 'POST', body });
   const j = await r.json().catch(() => ({}));
   if (!r.ok || j?.error) {
     throw new Error(`Graph POST /${urlPath} falhou (${r.status}): ${JSON.stringify(j.error || j)}`);
@@ -93,9 +94,9 @@ async function graphPost(urlPath, params) {
   return j;
 }
 
-async function graphGet(urlPath, params) {
+async function graphGet(urlPath, params, base = GRAPH) {
   const qs = new URLSearchParams(params).toString();
-  const r = await fetch(`${GRAPH}/${urlPath}?${qs}`);
+  const r = await fetch(`${base}/${urlPath}?${qs}`);
   const j = await r.json().catch(() => ({}));
   if (!r.ok || j?.error) {
     throw new Error(`Graph GET /${urlPath} falhou (${r.status}): ${JSON.stringify(j.error || j)}`);
@@ -110,52 +111,41 @@ async function graphGet(urlPath, params) {
 export async function postInstagram({ igUserId, token, imageUrls, caption }) {
   if (!imageUrls.length) throw new Error('Sem imagens pra postar no Instagram');
 
-  // Caso imagem única — sem carrossel.
   if (imageUrls.length === 1) {
     const c = await graphPost(`${igUserId}/media`, {
-      image_url: imageUrls[0],
-      caption,
-      access_token: token,
-    });
+      image_url: imageUrls[0], caption, access_token: token,
+    }, IG_GRAPH);
     await waitContainer(c.id, token);
     const pub = await graphPost(`${igUserId}/media_publish`, {
-      creation_id: c.id,
-      access_token: token,
-    });
+      creation_id: c.id, access_token: token,
+    }, IG_GRAPH);
     return pub.id;
   }
 
-  // Carrossel: 1 container por imagem (is_carousel_item), depois o container CAROUSEL.
   const childIds = [];
   for (const url of imageUrls) {
     const child = await graphPost(`${igUserId}/media`, {
-      image_url: url,
-      is_carousel_item: 'true',
-      access_token: token,
-    });
+      image_url: url, is_carousel_item: 'true', access_token: token,
+    }, IG_GRAPH);
     childIds.push(child.id);
   }
 
   const carousel = await graphPost(`${igUserId}/media`, {
-    media_type: 'CAROUSEL',
-    children: childIds.join(','),
-    caption,
-    access_token: token,
-  });
+    media_type: 'CAROUSEL', children: childIds.join(','), caption, access_token: token,
+  }, IG_GRAPH);
 
   await waitContainer(carousel.id, token);
 
   const pub = await graphPost(`${igUserId}/media_publish`, {
-    creation_id: carousel.id,
-    access_token: token,
-  });
+    creation_id: carousel.id, access_token: token,
+  }, IG_GRAPH);
   return pub.id;
 }
 
 // IG processa o container async; espera virar FINISHED antes de publicar.
 async function waitContainer(containerId, token, { tentativas = 20, intervaloMs = 3000 } = {}) {
   for (let i = 0; i < tentativas; i++) {
-    const j = await graphGet(containerId, { fields: 'status_code', access_token: token });
+    const j = await graphGet(containerId, { fields: 'status_code', access_token: token }, IG_GRAPH);
     if (j.status_code === 'FINISHED') return;
     if (j.status_code === 'ERROR') throw new Error(`Container IG deu ERROR: ${containerId}`);
     await sleep(intervaloMs);
