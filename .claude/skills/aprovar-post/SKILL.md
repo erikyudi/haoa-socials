@@ -22,13 +22,14 @@ e a publicação real no feed (site + Instagram + Facebook).
 ## Pré-requisitos (uma vez só)
 
 - `.env` na raiz com:
-  - `META_PAGE_ACCESS_TOKEN` — token de longa duração da Página FB
-  - `META_PAGE_ID` — ID da Página FB
-  - `META_IG_USER_ID` — ID da conta Insta Business
+  - `IG_ACCESS_TOKEN` — token de longa duração do Instagram Login (~60 dias)
+  - `IG_USER_ID` — ID da conta Instagram (vem do token exchange via `ig-token.mjs`)
+  - `IMGBB_KEY` — chave do imgbb (hospeda os PNGs)
   - `SITE_URL` — ex: `https://exemplo.com.br`
 - Site com deploy automático a partir do `main` do GitHub (Netlify, Vercel, etc.)
-- Conta Insta Business conectada à Página FB
-- Página FB com permissões corretas no Meta App
+- Conta Instagram Business (`@haoaseguros`) — não precisa vincular Página Facebook
+- App Meta com produto "Instagram API setup with Instagram login" configurado
+- Conta adicionada como Instagram Tester no app (modo desenvolvimento)
 - Scripts `scripts/postar-instagram.js` e `scripts/postar-facebook.js` configurados
 
 Se algo disso faltar: parar e apontar pro guia de setup (criar `marketing/automacao-meta-setup.md` se ainda não existir).

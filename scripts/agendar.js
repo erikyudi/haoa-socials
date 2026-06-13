@@ -43,7 +43,7 @@ function main() {
   }
 
   const datetime = normalizarDatetime(datetimeRaw);
-  const redes = (redesRaw || 'instagram,facebook')
+  const redes = (redesRaw || 'instagram')
     .split(',')
     .map((r) => r.trim().toLowerCase())
     .filter(Boolean);
