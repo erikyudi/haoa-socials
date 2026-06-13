@@ -8,8 +8,8 @@
 import { findSlides, readCaption, uploadAllToImgbb, postInstagram, env } from './lib-meta.mjs';
 
 export async function postarInstagram(folder) {
-  const igUserId = env('META_IG_USER_ID');
-  const token = env('META_PAGE_ACCESS_TOKEN');
+  const igUserId = env('IG_USER_ID');
+  const token    = env('IG_ACCESS_TOKEN');
   const imgbbKey = env('IMGBB_KEY');
 
   const slides = findSlides(folder);
